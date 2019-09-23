@@ -12,14 +12,14 @@
         <activity android:name=".LeaderBoardActivity"></activity>
         <activity android:name=".ShootingActivity" />
         <activity
-            android:name=".StartGameActivity"
+            android:name=".HomeActivity"
             android:label="@string/title_activity_start_game"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".SignupActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

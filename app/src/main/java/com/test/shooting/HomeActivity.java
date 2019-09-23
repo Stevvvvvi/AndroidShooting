@@ -5,16 +5,14 @@ import android.os.Bundle;
 
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
-public class StartGameActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
     Button btnLogOut;
     Button startGame;
@@ -24,7 +22,7 @@ public class StartGameActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_start_game);
+        setContentView(R.layout.activity_home);
 
         btnLogOut=findViewById(R.id.button6);
 
@@ -33,7 +31,7 @@ public class StartGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
-                Intent inToMain=new Intent(StartGameActivity.this,LoginActivity.class);
+                Intent inToMain=new Intent(HomeActivity.this,LoginActivity.class);
                 startActivity(inToMain);
             }
         });
@@ -43,8 +41,8 @@ public class StartGameActivity extends AppCompatActivity {
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(StartGameActivity.this,"The game started", Toast.LENGTH_LONG).show();
-                Intent inToGame=new Intent(StartGameActivity.this,ShootingActivity.class);
+                Toast.makeText(HomeActivity.this,"The game started", Toast.LENGTH_LONG).show();
+                Intent inToGame=new Intent(HomeActivity.this,ShootingActivity.class);
                 startActivity(inToGame);
             }
         });

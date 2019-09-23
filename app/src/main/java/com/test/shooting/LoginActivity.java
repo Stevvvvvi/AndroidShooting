@@ -11,7 +11,6 @@ import com.google.firebase.auth.FirebaseUser;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.view.View;
 import android.widget.Button;
@@ -20,11 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
-
-
-    private EditText emailId, password;
-    private Button btnSignIn;
-    private TextView tvSignUp;
+    EditText emailId, password;
+    Button btnSignIn;
+    TextView tvSignUp;
     FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
@@ -33,82 +30,77 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        mFirebaseAuth=FirebaseAuth.getInstance();
-        emailId=findViewById(R.id.editText);
-        password=findViewById(R.id.editText2);
-        btnSignIn=findViewById(R.id.button);
-        tvSignUp=findViewById(R.id.textView);
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        emailId = findViewById(R.id.login_email);
+        password = findViewById(R.id.login_password);
+        btnSignIn = findViewById(R.id.login_button);
+        tvSignUp = findViewById(R.id.textView4);
 
-
-        mAuthStateListener=new FirebaseAuth.AuthStateListener() {
-            FirebaseUser mFirebaseUser=mFirebaseAuth.getCurrentUser();
+        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if (mFirebaseUser!=null){
-                    Toast.makeText(LoginActivity.this,"You are logged in", Toast.LENGTH_LONG).show();
-                    Intent i=new Intent(LoginActivity.this, StartGameActivity.class);
+                FirebaseUser mFirebaseUser = mFirebaseAuth.getCurrentUser();
+                if( mFirebaseUser != null ){
+                    Toast.makeText(LoginActivity.this,"You are logged in",Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(LoginActivity.this, HomeActivity.class);
                     startActivity(i);
-
                 }
                 else{
-                    Toast.makeText(LoginActivity.this,"please login", Toast.LENGTH_LONG).show();
+                    Toast.makeText(LoginActivity.this,"Please Login",Toast.LENGTH_SHORT).show();
                 }
             }
         };
 
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                String email=emailId.getText().toString();
-                String pwd=password.getText().toString();
-                if (email.isEmpty()){
-                    emailId.setError("please enter email id");
+            public void onClick(View v) {
+                String email = emailId.getText().toString();
+                String pwd = password.getText().toString();
+                if(email.isEmpty()){
+                    emailId.setError("Please enter email id");
                     emailId.requestFocus();
                 }
-                else if (pwd.isEmpty()){
-                    password.setError("please enter your password");
+                else  if(pwd.isEmpty()){
+                    password.setError("Please enter your password");
                     password.requestFocus();
-
                 }
-                else if (email.isEmpty()&&pwd.isEmpty()){
+                else  if(email.isEmpty() && pwd.isEmpty()){
                     Toast.makeText(LoginActivity.this,"Fields Are Empty!",Toast.LENGTH_SHORT).show();
-
                 }
-                else if (!(email.isEmpty()&&pwd.isEmpty())){
-                    mFirebaseAuth.signInWithEmailAndPassword(email,pwd).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                else  if(!(email.isEmpty() && pwd.isEmpty())){
+                    mFirebaseAuth.signInWithEmailAndPassword(email, pwd).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (!task.isSuccessful()){
-                                Toast.makeText(LoginActivity.this,"login error, please try again",Toast.LENGTH_SHORT).show();
-
+                            if(!task.isSuccessful()){
+                                Toast.makeText(LoginActivity.this,"Login Error, Please Login Again",Toast.LENGTH_SHORT).show();
                             }
                             else{
-                                Toast.makeText(LoginActivity.this,"You are logged in", Toast.LENGTH_LONG).show();
-                                Intent intToHome=new Intent(LoginActivity.this,StartGameActivity.class);
+                                Intent intToHome = new Intent(LoginActivity.this,HomeActivity.class);
                                 startActivity(intToHome);
                             }
                         }
                     });
                 }
                 else{
-                    Toast.makeText(LoginActivity.this,"Error!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this,"Error Occurred!",Toast.LENGTH_SHORT).show();
+
                 }
+
             }
         });
 
         tvSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intSignUp=new Intent(LoginActivity.this,MainActivity.class);
+            public void onClick(View v) {
+                Intent intSignUp = new Intent(LoginActivity.this, SignupActivity.class);
                 startActivity(intSignUp);
             }
         });
     }
 
     @Override
-    protected void onStart(){
+    protected void onStart() {
         super.onStart();
-        //mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+//        mFirebaseAuth.addAuthStateListener(mAuthStateListener);
     }
-
 }
