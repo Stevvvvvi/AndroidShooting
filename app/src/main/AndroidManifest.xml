@@ -10,8 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".LeaderBoardActivity"></activity>
-        <activity android:name=".shoot1Activity" />
-        <activity android:name=".testActivity" />
         <activity android:name=".ShootingActivity" />
         <activity
             android:name=".StartGameActivity"
