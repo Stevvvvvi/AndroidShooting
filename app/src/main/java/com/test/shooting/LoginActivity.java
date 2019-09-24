@@ -24,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText emailId, password;
     private Button btnSignIn;
-    private TextView tvLogin;
+    private TextView tvSignUp;
     FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
@@ -37,7 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         emailId=findViewById(R.id.login_email);
         password=findViewById(R.id.login_password);
         btnSignIn=findViewById(R.id.btnSignIn);
-        tvLogin=findViewById(R.id.tvLogin);
+        tvSignUp=findViewById(R.id.tvSignUp);
 
 
         mAuthStateListener=new FirebaseAuth.AuthStateListener() {
@@ -96,7 +96,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        tvLogin.setOnClickListener(new View.OnClickListener() {
+        tvSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intSignUp=new Intent(LoginActivity.this,MainActivity.class);
