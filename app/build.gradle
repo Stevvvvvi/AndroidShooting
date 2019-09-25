@@ -35,6 +35,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics:17.2.0'
     implementation 'com.google.firebase:firebase-auth:19.0.0'
     implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.12.0'
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
 
 }
 

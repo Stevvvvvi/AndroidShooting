@@ -8,9 +8,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.FadingCircle;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -31,13 +34,17 @@ public class SignupActivity extends AppCompatActivity {
 
         //delete login activity
 
-
-
         mFirebaseAuth=FirebaseAuth.getInstance();
         emailId=findViewById(R.id.signup_email);
         password=findViewById(R.id.signup_password);
         btnSignUp=findViewById(R.id.btnSignUp);
         tvLogin=findViewById(R.id.tvLogin);
+        ProgressBar progressBar;
+
+        //loading view
+        progressBar = (ProgressBar)findViewById(R.id.progress);
+        Sprite fadingCircle = new FadingCircle();
+        progressBar.setIndeterminateDrawable(fadingCircle);
 
         btnSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,6 +65,7 @@ public class SignupActivity extends AppCompatActivity {
 
                 }
                 else if (!(email.isEmpty()&&pwd.isEmpty())){
+                    progressBar.setVisibility(View.VISIBLE);
                     mFirebaseAuth.createUserWithEmailAndPassword(email,pwd).addOnCompleteListener(SignupActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
