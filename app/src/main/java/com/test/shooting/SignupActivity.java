@@ -71,9 +71,11 @@ public class SignupActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (!task.isSuccessful()){
                                 Toast.makeText(SignupActivity.this,"SignUp Unsuccessful, Please Try Again!",Toast.LENGTH_SHORT).show();
+                                progressBar.setVisibility(View.INVISIBLE);
 
                             }else {
                                 startActivity(new Intent(SignupActivity.this,StartGameActivity.class));
+                                finish();
                             }
                         }
                     });
