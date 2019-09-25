@@ -15,9 +15,16 @@ import android.widget.Toast;
 import com.github.ybq.android.spinkit.sprite.Sprite;
 import com.github.ybq.android.spinkit.style.FadingCircle;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -25,6 +32,7 @@ public class SignupActivity extends AppCompatActivity {
     private Button btnSignUp;
     private TextView tvLogin;
     FirebaseAuth mFirebaseAuth;
+    private FirebaseFirestore db;
 
 
     @Override
@@ -33,6 +41,7 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
 
         //delete login activity
+        db = FirebaseFirestore.getInstance();
 
         mFirebaseAuth=FirebaseAuth.getInstance();
         emailId=findViewById(R.id.signup_email);
@@ -52,11 +61,11 @@ public class SignupActivity extends AppCompatActivity {
                 String email=emailId.getText().toString();
                 String pwd=password.getText().toString();
                 if (email.isEmpty()){
-                    emailId.setError("please enter email id");
+                    emailId.setError("Please enter email");
                     emailId.requestFocus();
                 }
                 else if (pwd.isEmpty()){
-                    password.setError("please enter your password");
+                    password.setError("Please enter password");
                     password.requestFocus();
 
                 }
@@ -74,8 +83,30 @@ public class SignupActivity extends AppCompatActivity {
                                 progressBar.setVisibility(View.INVISIBLE);
 
                             }else {
-                                startActivity(new Intent(SignupActivity.this,StartGameActivity.class));
-                                finish();
+                                // after create the account, add the profile value to database
+                                Map<String, Object> user = new HashMap<>();
+                                //user.put("Email", email);
+
+                                // Add a new document with a generated ID
+                                db.collection("Users")
+                                        .document(email)
+                                        .set(user)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Toast.makeText(SignupActivity.this, "Successful!", Toast.LENGTH_SHORT).show();
+                                                startActivity(new Intent(SignupActivity.this,StartGameActivity.class));
+                                                finish();
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                String error = e.getMessage();
+                                                Toast.makeText(SignupActivity.this, "Error"+error, Toast.LENGTH_SHORT).show();
+
+                                            }
+                                        });
                             }
                         }
                     });
