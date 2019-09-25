@@ -26,6 +26,9 @@ public class StartGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_game);
 
+        //delete main activity
+        MainActivity.main.finish();
+
         btnLogOut=findViewById(R.id.button6);
 
 
@@ -35,6 +38,7 @@ public class StartGameActivity extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 Intent inToMain=new Intent(StartGameActivity.this,LoginActivity.class);
                 startActivity(inToMain);
+                finish();
             }
         });
 
@@ -46,6 +50,7 @@ public class StartGameActivity extends AppCompatActivity {
                 Toast.makeText(StartGameActivity.this,"The game started", Toast.LENGTH_LONG).show();
                 Intent inToGame=new Intent(StartGameActivity.this,ShootingActivity.class);
                 startActivity(inToGame);
+                finish();
             }
         });
 

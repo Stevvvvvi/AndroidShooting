@@ -36,12 +36,14 @@ public class LeaderBoardActivity extends AppCompatActivity {
             FirebaseAuth.getInstance().signOut();
             Intent inToMain=new Intent(LeaderBoardActivity.this,LoginActivity.class);
             startActivity(inToMain);
+            finish();
         });
 
         restart.setOnClickListener(view -> {
             Toast.makeText(LeaderBoardActivity.this,"The game started", Toast.LENGTH_LONG).show();
             Intent inToGame=new Intent(LeaderBoardActivity.this,ShootingActivity.class);
             startActivity(inToGame);
+            finish();
         });
 
 

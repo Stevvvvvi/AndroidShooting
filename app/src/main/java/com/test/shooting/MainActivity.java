@@ -9,7 +9,7 @@ import android.widget.Button;
 
 
 public class MainActivity extends AppCompatActivity {
-
+    public static MainActivity main = null; //allow other activity to finish this activity
     private Button button;
 
 
@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        main = this;//allow other activity to finish this activity
+
 
         setContentView(R.layout.activity_main);
 
