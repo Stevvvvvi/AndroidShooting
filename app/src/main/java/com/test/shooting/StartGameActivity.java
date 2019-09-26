@@ -18,6 +18,7 @@ public class StartGameActivity extends AppCompatActivity {
 
     private Button btnLogOut;
     private Button startGame;
+    private Button btnLeaderboard;
     FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
@@ -29,8 +30,9 @@ public class StartGameActivity extends AppCompatActivity {
         //delete main activity
         MainActivity.main.finish();
 
-        btnLogOut=findViewById(R.id.button6);
-
+        btnLogOut=findViewById(R.id.logout);
+        startGame=findViewById(R.id.startgame);
+        btnLeaderboard=findViewById(R.id.leaderboard);
 
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +44,6 @@ public class StartGameActivity extends AppCompatActivity {
             }
         });
 
-        startGame=findViewById(R.id.button2);
 
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +51,16 @@ public class StartGameActivity extends AppCompatActivity {
                 Toast.makeText(StartGameActivity.this,"The game started", Toast.LENGTH_LONG).show();
                 Intent inToGame=new Intent(StartGameActivity.this,ShootingActivity.class);
                 startActivity(inToGame);
+                //finish();
+            }
+        });
+
+        btnLeaderboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(StartGameActivity.this,"The game started", Toast.LENGTH_LONG).show();
+                Intent i=new Intent(StartGameActivity.this,LeaderboardActivity.class);
+                startActivity(i);
                 //finish();
             }
         });
