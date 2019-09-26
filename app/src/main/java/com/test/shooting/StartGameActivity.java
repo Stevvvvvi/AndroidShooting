@@ -16,8 +16,8 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class StartGameActivity extends AppCompatActivity {
 
-    Button btnLogOut;
-    Button startGame;
+    private Button btnLogOut;
+    private Button startGame;
     FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
@@ -50,7 +50,7 @@ public class StartGameActivity extends AppCompatActivity {
                 Toast.makeText(StartGameActivity.this,"The game started", Toast.LENGTH_LONG).show();
                 Intent inToGame=new Intent(StartGameActivity.this,ShootingActivity.class);
                 startActivity(inToGame);
-                finish();
+                //finish();
             }
         });
 
