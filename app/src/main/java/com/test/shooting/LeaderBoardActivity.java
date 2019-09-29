@@ -40,7 +40,7 @@ public class LeaderBoardActivity extends AppCompatActivity {
 
         restart.setOnClickListener(view -> {
             Toast.makeText(LeaderBoardActivity.this,"The game started", Toast.LENGTH_LONG).show();
-            Intent inToGame=new Intent(LeaderBoardActivity.this,ShootingActivity.class);
+            Intent inToGame=new Intent(LeaderBoardActivity.this,ShootingActivityAnimation.class);
             startActivity(inToGame);
         });
 

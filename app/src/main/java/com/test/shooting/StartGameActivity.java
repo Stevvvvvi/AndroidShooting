@@ -44,7 +44,7 @@ public class StartGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(StartGameActivity.this,"The game started", Toast.LENGTH_LONG).show();
-                Intent inToGame=new Intent(StartGameActivity.this,ShootingActivity.class);
+                Intent inToGame=new Intent(StartGameActivity.this,ShootingActivityAnimation.class);
                 startActivity(inToGame);
             }
         });

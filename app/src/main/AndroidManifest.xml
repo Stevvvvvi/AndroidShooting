@@ -13,6 +13,7 @@
         <activity android:name=".shoot1Activity" />
         <activity android:name=".testActivity" />
         <activity android:name=".ShootingActivity" />
+        <activity android:name=".ShootingActivityAnimation" />
         <activity
             android:name=".StartGameActivity"
             android:label="@string/title_activity_start_game"
