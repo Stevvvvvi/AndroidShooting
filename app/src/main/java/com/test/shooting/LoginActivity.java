@@ -3,6 +3,9 @@ package com.test.shooting;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.github.ybq.android.spinkit.sprite.Sprite;
+import com.github.ybq.android.spinkit.style.DoubleBounce;
+import com.github.ybq.android.spinkit.style.FadingCircle;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -16,6 +19,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +30,8 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnSignIn;
     private TextView tvSignUp;
     FirebaseAuth mFirebaseAuth;
+    ProgressBar progressBar;
+
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
     @Override
@@ -34,11 +40,15 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         mFirebaseAuth=FirebaseAuth.getInstance();
-        emailId=findViewById(R.id.editText);
-        password=findViewById(R.id.editText2);
-        btnSignIn=findViewById(R.id.button);
-        tvSignUp=findViewById(R.id.textView);
+        emailId=findViewById(R.id.login_email);
+        password=findViewById(R.id.login_password);
+        btnSignIn=findViewById(R.id.btnSignIn);
+        tvSignUp=findViewById(R.id.tvSignUp);
 
+        //loading view
+        progressBar = (ProgressBar)findViewById(R.id.progress);
+        Sprite fadingCircle = new FadingCircle();
+        progressBar.setIndeterminateDrawable(fadingCircle);
 
         mAuthStateListener=new FirebaseAuth.AuthStateListener() {
             FirebaseUser mFirebaseUser=mFirebaseAuth.getCurrentUser();
@@ -75,17 +85,21 @@ public class LoginActivity extends AppCompatActivity {
 
                 }
                 else if (!(email.isEmpty()&&pwd.isEmpty())){
+                    progressBar.setVisibility(View.VISIBLE);
                     mFirebaseAuth.signInWithEmailAndPassword(email,pwd).addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (!task.isSuccessful()){
                                 Toast.makeText(LoginActivity.this,"login error, please try again",Toast.LENGTH_SHORT).show();
+                                progressBar.setVisibility(View.INVISIBLE);
+
 
                             }
                             else{
                                 Toast.makeText(LoginActivity.this,"You are logged in", Toast.LENGTH_LONG).show();
                                 Intent intToHome=new Intent(LoginActivity.this,StartGameActivity.class);
                                 startActivity(intToHome);
+                                finish();
                             }
                         }
                     });
@@ -99,8 +113,9 @@ public class LoginActivity extends AppCompatActivity {
         tvSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intSignUp=new Intent(LoginActivity.this,MainActivity.class);
+                Intent intSignUp=new Intent(LoginActivity.this,SignupActivity.class);
                 startActivity(intSignUp);
+                finish();
             }
         });
     }
@@ -108,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        //mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+//        mFirebaseAuth.addAuthStateListener(mAuthStateListener);
     }
 
 }

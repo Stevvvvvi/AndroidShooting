@@ -16,8 +16,9 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class StartGameActivity extends AppCompatActivity {
 
-    Button btnLogOut;
-    Button startGame;
+    private Button btnLogOut;
+    private Button startGame;
+    private Button btnLeaderboard;
     FirebaseAuth mFirebaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
 
@@ -26,8 +27,12 @@ public class StartGameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start_game);
 
-        btnLogOut=findViewById(R.id.button6);
+        //delete main activity
+        MainActivity.main.finish();
 
+        btnLogOut=findViewById(R.id.logout);
+        startGame=findViewById(R.id.startgame);
+        btnLeaderboard=findViewById(R.id.leaderboard);
 
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,10 +40,10 @@ public class StartGameActivity extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 Intent inToMain=new Intent(StartGameActivity.this,LoginActivity.class);
                 startActivity(inToMain);
+                finish();
             }
         });
 
-        startGame=findViewById(R.id.button2);
 
         startGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,6 +51,17 @@ public class StartGameActivity extends AppCompatActivity {
                 Toast.makeText(StartGameActivity.this,"The game started", Toast.LENGTH_LONG).show();
                 Intent inToGame=new Intent(StartGameActivity.this,ShootingActivity.class);
                 startActivity(inToGame);
+                //finish();
+            }
+        });
+
+        btnLeaderboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(StartGameActivity.this,"The game started", Toast.LENGTH_LONG).show();
+                Intent i=new Intent(StartGameActivity.this,LeaderboardActivity.class);
+                startActivity(i);
+                //finish();
             }
         });
 
