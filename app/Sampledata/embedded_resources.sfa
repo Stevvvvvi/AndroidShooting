@@ -65,33 +65,33 @@
   },
   samplers: [
     {
-      file: 'Sampledata\\embedded_resources.fbm\\porg_occlusion.png',
-      name: 'porg_occlusion',
-      params: {
-        usage_type: 'Data',
-      },
-      pipeline_name: 'embedded_resources.fbm\\porg_occlusion.png',
-    },
-    {
-      file: 'Sampledata\\embedded_resources.fbm\\porg_normal.png',
-      name: 'porg_normal',
-      params: {
-        usage_type: 'Normal',
-      },
-      pipeline_name: 'embedded_resources.fbm\\porg_normal.png',
-    },
-    {
-      file: 'Sampledata\\embedded_resources.fbm\\porg_diffuse.png',
-      name: 'porg_diffuse',
-      pipeline_name: 'embedded_resources.fbm\\porg_diffuse.png',
-    },
-    {
-      file: 'Sampledata\\embedded_resources.fbm\\porg_roughness.png',
+      file: 'Sampledata/embedded_resources.fbm/porg_roughness.png',
       name: 'porg_roughness',
       params: {
         usage_type: 'Data',
       },
-      pipeline_name: 'embedded_resources.fbm\\porg_roughness.png',
+      pipeline_name: 'embedded_resources.fbm/porg_roughness.png',
+    },
+    {
+      file: 'Sampledata/embedded_resources.fbm/porg_occlusion.png',
+      name: 'porg_occlusion',
+      params: {
+        usage_type: 'Data',
+      },
+      pipeline_name: 'embedded_resources.fbm/porg_occlusion.png',
+    },
+    {
+      file: 'Sampledata/embedded_resources.fbm/porg_diffuse.png',
+      name: 'porg_diffuse',
+      pipeline_name: 'embedded_resources.fbm/porg_diffuse.png',
+    },
+    {
+      file: 'Sampledata/embedded_resources.fbm/porg_normal.png',
+      name: 'porg_normal',
+      params: {
+        usage_type: 'Normal',
+      },
+      pipeline_name: 'embedded_resources.fbm/porg_normal.png',
     },
   ],
   version: '0.54:2',
