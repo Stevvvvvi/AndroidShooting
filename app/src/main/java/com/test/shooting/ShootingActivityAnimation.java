@@ -195,9 +195,10 @@ public class ShootingActivityAnimation extends AppCompatActivity {
             }
             timeInfo=minitesPassed+":"+secondsPassed;
             //Toast.makeText(ShootingActivity.this,"Congrats!",Toast.LENGTH_SHORT).show();
-            Intent inToleader=new Intent(ShootingActivityAnimation.this,LeaderboardActivity.class);
+            Intent inToleader=new Intent(ShootingActivityAnimation.this,GameResultActivity.class);
             inToleader.putExtra("EXTRA_MESSAGE",timeInfo);
             startActivity(inToleader);
+            finish();
         }).start();
     }
 
