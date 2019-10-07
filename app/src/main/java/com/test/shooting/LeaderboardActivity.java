@@ -62,7 +62,7 @@ public class LeaderboardActivity extends AppCompatActivity {
                                 Log.d(TAG, "userTime" + " => " + userList.getUserTime());
                                 top[i].setText(document.getId() + " => " + userList.getUserTime());
                                 i++;
-
+                                //  need to change the value structure "0:2" to "0:02"
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
