@@ -36,6 +36,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics:17.2.0'
     implementation 'com.google.firebase:firebase-auth:19.0.0'
     implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.12.0'
+    implementation 'com.google.ar.sceneform:animation:1.12.0'
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
 
 
@@ -52,3 +53,10 @@ sceneform.asset('Sampledata/Wolves.obj',
         'Sampledata/Wolves.sfa',
         'src/main/assets/Wolves')
 apply plugin: 'com.google.gms.google-services'
+
+
+sceneform.asset('Sampledata/embedded_resources.fbx',
+        'default',
+        'Sampledata/embedded_resources.sfa',
+        'src/main/assets/bird')
+
