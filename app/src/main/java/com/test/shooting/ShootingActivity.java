@@ -9,11 +9,8 @@ import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Display;
-import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.ar.sceneform.Camera;
 import com.google.ar.sceneform.Node;
@@ -33,7 +30,7 @@ public class ShootingActivity extends AppCompatActivity {
     private Camera camera;
     private ModelRenderable bulletRenderable;
     private boolean shouldStartTimer=true;
-    private int balloonsLeft=20;
+    private int balloonsLeft=2;
     private Point point;
     private TextView balloonleftTxt;
     private SoundPool soundPool;
@@ -185,9 +182,10 @@ public class ShootingActivity extends AppCompatActivity {
             }
             timeInfo=minitesPassed+":"+secondsPassed;
             //Toast.makeText(ShootingActivity.this,"Congrats!",Toast.LENGTH_SHORT).show();
-            Intent inToleader=new Intent(ShootingActivity.this,LeaderBoardActivity.class);
+            Intent inToleader=new Intent(ShootingActivity.this, GameResultActivity.class);
             inToleader.putExtra("EXTRA_MESSAGE",timeInfo);
             startActivity(inToleader);
+            finish();
         }).start();
     }
 

@@ -20,7 +20,7 @@ import com.google.ar.sceneform.Camera;
 import com.google.ar.sceneform.Node;
 import com.google.ar.sceneform.Scene;
 import com.google.ar.sceneform.SkeletonNode;
-import com.google.ar.sceneform.animation.ModelAnimator;
+//import com.google.ar.sceneform.animation.ModelAnimator;
 import com.google.ar.sceneform.collision.Ray;
 import com.google.ar.sceneform.math.Quaternion;
 import com.google.ar.sceneform.math.Vector3;
@@ -46,7 +46,7 @@ public class ShootingActivityAnimation extends AppCompatActivity {
     private SoundPool soundPool;
     private int sound;
     protected String timeInfo;
-    private ModelAnimator modelAnimator;
+    //private ModelAnimator modelAnimator;
     private int i=0;
 //    private RelativeLayout myLayout=null;
 
@@ -195,7 +195,7 @@ public class ShootingActivityAnimation extends AppCompatActivity {
             }
             timeInfo=minitesPassed+":"+secondsPassed;
             //Toast.makeText(ShootingActivity.this,"Congrats!",Toast.LENGTH_SHORT).show();
-            Intent inToleader=new Intent(ShootingActivityAnimation.this,LeaderBoardActivity.class);
+            Intent inToleader=new Intent(ShootingActivityAnimation.this,LeaderboardActivity.class);
             inToleader.putExtra("EXTRA_MESSAGE",timeInfo);
             startActivity(inToleader);
         }).start();
@@ -346,21 +346,21 @@ public class ShootingActivityAnimation extends AppCompatActivity {
 
 
 
-    private void animateModel(ModelRenderable modelRenderable){
-        if (modelAnimator!=null&& modelAnimator.isRunning()){
-            modelAnimator.end();
-
-            int animationCount=modelRenderable.getAnimationDataCount();
-
-            if (i==animationCount)
-                i=0;
-            AnimationData animationData=modelRenderable.getAnimationData(i);
-
-            modelAnimator =new ModelAnimator(animationData,modelRenderable);
-            modelAnimator.start();
-            i++;
-        }
-    }
+//    private void animateModel(ModelRenderable modelRenderable){
+//        if (modelAnimator!=null&& modelAnimator.isRunning()){
+//            modelAnimator.end();
+//
+//            int animationCount=modelRenderable.getAnimationDataCount();
+//
+//            if (i==animationCount)
+//                i=0;
+//            AnimationData animationData=modelRenderable.getAnimationData(i);
+//
+//            modelAnimator =new ModelAnimator(animationData,modelRenderable);
+//            modelAnimator.start();
+//            i++;
+//        }
+//    }
 
    // @Override
     //protected void onStart(){
