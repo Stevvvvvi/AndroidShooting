@@ -1,5 +1,7 @@
 package com.test.shooting;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.graphics.Point;
 import android.media.AudioAttributes;
@@ -7,40 +9,30 @@ import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Display;
-import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.TextView;
-import com.google.ar.core.Anchor;
 
-import androidx.annotation.UiThread;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.Camera;
 import com.google.ar.sceneform.Node;
 import com.google.ar.sceneform.Scene;
-import com.google.ar.sceneform.SkeletonNode;
-//import com.google.ar.sceneform.animation.ModelAnimator;
 import com.google.ar.sceneform.collision.Ray;
 import com.google.ar.sceneform.math.Quaternion;
 import com.google.ar.sceneform.math.Vector3;
-import com.google.ar.sceneform.rendering.AnimationData;
 import com.google.ar.sceneform.rendering.MaterialFactory;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.rendering.ShapeFactory;
 import com.google.ar.sceneform.rendering.Texture;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ShootingActivityAnimation extends AppCompatActivity {
+public class ShootingActivity_hard extends AppCompatActivity {
 
     private Scene scene;
     private Camera camera;
     private ModelRenderable bulletRenderable;
     private boolean shouldStartTimer=true;
-    private int balloonsLeft=20;
+    private int balloonsLeft=2;
     private Point point;
     private TextView balloonleftTxt;
     private SoundPool soundPool;
@@ -59,7 +51,7 @@ public class ShootingActivityAnimation extends AppCompatActivity {
         point=new Point();
         display.getRealSize(point);
 
-        setContentView(R.layout.activity_shooting_animation);
+        setContentView(R.layout.activity_shooting_hard);
 
         loadSoundPool();
         balloonleftTxt=findViewById(R.id.balloonsCntTxt);
@@ -92,12 +84,12 @@ public class ShootingActivityAnimation extends AppCompatActivity {
 
         shoot.setOnClickListener(v-> {
 
-                if(shouldStartTimer){
-                    startTimer();
-                    shouldStartTimer=false;
-                }
+            if(shouldStartTimer){
+                startTimer();
+                shouldStartTimer=false;
+            }
 
-                shoot();
+            shoot();
 
         });
 
@@ -195,7 +187,7 @@ public class ShootingActivityAnimation extends AppCompatActivity {
             }
             timeInfo=minitesPassed+":"+secondsPassed;
             //Toast.makeText(ShootingActivity.this,"Congrats!",Toast.LENGTH_SHORT).show();
-            Intent inToleader=new Intent(ShootingActivityAnimation.this,GameResultActivity.class);
+            Intent inToleader=new Intent(ShootingActivity_hard.this,GameResultActivity.class);
             inToleader.putExtra("EXTRA_MESSAGE",timeInfo);
             startActivity(inToleader);
             finish();
@@ -212,12 +204,12 @@ public class ShootingActivityAnimation extends AppCompatActivity {
                     MaterialFactory
                             .makeOpaqueWithTexture(this, texture)
                             .thenAccept(material -> {
-                                  bulletRenderable=ShapeFactory
-                                          .makeSphere(0.01f,
-                                                  new Vector3(0f,0f,0f)
-                                                  ,material);
-                    });
-        });
+                                bulletRenderable= ShapeFactory
+                                        .makeSphere(0.01f,
+                                                new Vector3(0f,0f,0f)
+                                                ,material);
+                            });
+                });
     }
 
     private void addBalloonsToScene() {
@@ -363,9 +355,9 @@ public class ShootingActivityAnimation extends AppCompatActivity {
 //        }
 //    }
 
-   // @Override
+    // @Override
     //protected void onStart(){
-     //   super.onStart();
-        //mFirebaseAuth.addAuthStateListener(mAuthStateListener);
-   // }
+    //   super.onStart();
+    //mFirebaseAuth.addAuthStateListener(mAuthStateListener);
+    // }
 }

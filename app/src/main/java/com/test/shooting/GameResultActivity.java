@@ -61,7 +61,7 @@ public class GameResultActivity extends AppCompatActivity {
 
         restart.setOnClickListener(view -> {
             Toast.makeText(GameResultActivity.this,"The game started", Toast.LENGTH_LONG).show();
-            Intent inToGame=new Intent(GameResultActivity.this,ShootingActivity.class);
+            Intent inToGame=new Intent(GameResultActivity.this,ShootingActivity_normal.class);
             startActivity(inToGame);
             finish();
         });
