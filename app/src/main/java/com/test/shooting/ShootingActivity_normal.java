@@ -39,6 +39,7 @@ public class ShootingActivity_normal extends AppCompatActivity {
     private SoundPool soundPool;
     private int sound;
     protected String timeInfo;
+    protected String Mode;
     //private ModelAnimator modelAnimator;
     private int i=0;
 //    private RelativeLayout myLayout=null;
@@ -189,7 +190,12 @@ public class ShootingActivity_normal extends AppCompatActivity {
             timeInfo=minitesPassed+":"+secondsPassed;
             //Toast.makeText(ShootingActivity.this,"Congrats!",Toast.LENGTH_SHORT).show();
             Intent inToleader=new Intent(ShootingActivity_normal.this,GameResultActivity.class);
-            inToleader.putExtra("EXTRA_MESSAGE",timeInfo);
+            inToleader.putExtra("GameTime",timeInfo);
+
+            Mode="Normal";
+            inToleader.putExtra("Mode",Mode);
+
+
             startActivity(inToleader);
             finish();
         }).start();

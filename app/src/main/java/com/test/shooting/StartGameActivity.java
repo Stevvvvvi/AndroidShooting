@@ -51,7 +51,7 @@ public class StartGameActivity extends AppCompatActivity {
                 Toast.makeText(StartGameActivity.this,"The game started", Toast.LENGTH_LONG).show();
                 Intent i=new Intent(StartGameActivity.this,LeaderboardActivity.class);
                 startActivity(i);
-                finish();
+                //finish();
             }
         });
 
@@ -61,7 +61,7 @@ public class StartGameActivity extends AppCompatActivity {
                 Toast.makeText(StartGameActivity.this,"The game started", Toast.LENGTH_LONG).show();
                 Intent inToGame=new Intent(StartGameActivity.this, ShootingActivity_easy.class);
                 startActivity(inToGame);
-                finish();
+                //finish();
             }
         });
 
@@ -72,7 +72,7 @@ public class StartGameActivity extends AppCompatActivity {
                 Toast.makeText(StartGameActivity.this,"The game started", Toast.LENGTH_LONG).show();
                 Intent inToGame=new Intent(StartGameActivity.this, ShootingActivity_normal.class);
                 startActivity(inToGame);
-                finish();
+                //finish();
             }
         });
 
@@ -82,7 +82,7 @@ public class StartGameActivity extends AppCompatActivity {
                 Toast.makeText(StartGameActivity.this,"The game started", Toast.LENGTH_LONG).show();
                 Intent inToGame=new Intent(StartGameActivity.this, ShootingActivity_hard.class);
                 startActivity(inToGame);
-                finish();
+                //finish();
             }
         });
 

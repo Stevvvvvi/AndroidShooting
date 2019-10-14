@@ -1,7 +1,5 @@
 package com.test.shooting;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Point;
 import android.media.AudioAttributes;
@@ -12,9 +10,12 @@ import android.view.Display;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.ar.sceneform.Camera;
 import com.google.ar.sceneform.Node;
 import com.google.ar.sceneform.Scene;
+//import com.google.ar.sceneform.animation.ModelAnimator;
 import com.google.ar.sceneform.collision.Ray;
 import com.google.ar.sceneform.math.Quaternion;
 import com.google.ar.sceneform.math.Vector3;
@@ -28,7 +29,6 @@ import java.util.Random;
 
 public class ShootingActivity_easy extends AppCompatActivity {
 
-
     private Scene scene;
     private Camera camera;
     private ModelRenderable bulletRenderable;
@@ -39,6 +39,7 @@ public class ShootingActivity_easy extends AppCompatActivity {
     private SoundPool soundPool;
     private int sound;
     protected String timeInfo;
+    protected String Mode;
     //private ModelAnimator modelAnimator;
     private int i=0;
 //    private RelativeLayout myLayout=null;
@@ -189,7 +190,12 @@ public class ShootingActivity_easy extends AppCompatActivity {
             timeInfo=minitesPassed+":"+secondsPassed;
             //Toast.makeText(ShootingActivity.this,"Congrats!",Toast.LENGTH_SHORT).show();
             Intent inToleader=new Intent(ShootingActivity_easy.this,GameResultActivity.class);
-            inToleader.putExtra("EXTRA_MESSAGE",timeInfo);
+            inToleader.putExtra("GameTime",timeInfo);
+
+            Mode="Easy";
+            inToleader.putExtra("Mode",Mode);
+
+
             startActivity(inToleader);
             finish();
         }).start();
@@ -205,7 +211,7 @@ public class ShootingActivity_easy extends AppCompatActivity {
                     MaterialFactory
                             .makeOpaqueWithTexture(this, texture)
                             .thenAccept(material -> {
-                                bulletRenderable= ShapeFactory
+                                bulletRenderable=ShapeFactory
                                         .makeSphere(0.01f,
                                                 new Vector3(0f,0f,0f)
                                                 ,material);

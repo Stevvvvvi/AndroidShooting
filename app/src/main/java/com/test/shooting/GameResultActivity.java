@@ -18,7 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class GameResultActivity extends AppCompatActivity {
 
-    private TextView timeDisplay,BesttimeDisplay;
+    private TextView timeDisplay,BesttimeDisplay,ModeDisplay;
     private Button back;
     private Button restart;
     private FirebaseFirestore db;
@@ -40,22 +40,22 @@ public class GameResultActivity extends AppCompatActivity {
         BesttimeDisplay = findViewById(R.id.besttime);
         restart=findViewById(R.id.restart);
         back=findViewById(R.id.back);
+        ModeDisplay=findViewById(R.id.mode);
 
         //get the time value from shooting activity
         Intent intent=getIntent();
-        String gametime=intent.getStringExtra("EXTRA_MESSAGE");
+        String gametime=intent.getStringExtra("GameTime");
+        String gamemode=intent.getStringExtra("Mode");
         timeDisplay.setText(transformTime(gametime));
-
+        ModeDisplay.setText(gamemode);
 
         //read the time from user database and get the best time. Then write the best time
         readvalue(gametime);
 
 
-
         back.setOnClickListener(view -> {
-            FirebaseAuth.getInstance().signOut();
-            Intent inToMain=new Intent(GameResultActivity.this,StartGameActivity.class);
-            startActivity(inToMain);
+//            Intent inToMain=new Intent(GameResultActivity.this,StartGameActivity.class);
+//            startActivity(inToMain);
             finish();
         });
 
@@ -94,7 +94,6 @@ public class GameResultActivity extends AppCompatActivity {
                             BesttimeDisplay.setText(transformTime(best_time));
 
                         }
-
                     }
                 });
     }
