@@ -49,6 +49,8 @@ public class GameResultActivity extends AppCompatActivity {
         timeDisplay.setText(transformTime(gametime));
         ModeDisplay.setText(gamemode);
 
+
+
         //read the time from user database and get the best time. Then write the best time
         readvalue(gametime);
 
@@ -60,10 +62,24 @@ public class GameResultActivity extends AppCompatActivity {
         });
 
         restart.setOnClickListener(view -> {
-            Toast.makeText(GameResultActivity.this,"The game started", Toast.LENGTH_LONG).show();
-            Intent inToGame=new Intent(GameResultActivity.this,ShootingActivity_normal.class);
-            startActivity(inToGame);
-            finish();
+            if (gamemode.equals("Easy")){
+                Toast.makeText(GameResultActivity.this,"The game started", Toast.LENGTH_LONG).show();
+                Intent inToGame=new Intent(GameResultActivity.this,ShootingActivity_easy.class);
+                startActivity(inToGame);
+                finish();
+            }
+            else if (gamemode.equals("Normal")){
+                Toast.makeText(GameResultActivity.this,"The game started", Toast.LENGTH_LONG).show();
+                Intent inToGame=new Intent(GameResultActivity.this,ShootingActivity_normal.class);
+                startActivity(inToGame);
+                finish();
+            }
+            else if (gamemode.equals("Hard")){
+                Toast.makeText(GameResultActivity.this,"The game started", Toast.LENGTH_LONG).show();
+                Intent inToGame=new Intent(GameResultActivity.this,ShootingActivity_hard.class);
+                startActivity(inToGame);
+                finish();
+            }
         });
     }
 
@@ -145,7 +161,7 @@ public class GameResultActivity extends AppCompatActivity {
     public String transformTime(String time){
         String[] time_arrary = time.split(":");
 
-        return time_arrary[0]+"min "+time_arrary[1]+"s";
+        return time_arrary[0]+" min "+time_arrary[1]+"s";
     }
 
     /**

@@ -192,7 +192,7 @@ public class ShootingActivity_hard extends AppCompatActivity {
             Intent inToleader=new Intent(ShootingActivity_hard.this,GameResultActivity.class);
             inToleader.putExtra("GameTime",timeInfo);
 
-            Mode="hard";
+            Mode="Hard";
             inToleader.putExtra("Mode",Mode);
 
 
