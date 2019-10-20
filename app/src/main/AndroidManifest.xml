@@ -14,6 +14,7 @@
         <activity android:name=".GameResultActivity" />
         <activity android:name=".ShootingActivity" />
         <activity android:name=".ShootingActivityAnimation" />
+        <activity android:name=".ShootingActivitydifficult" />
         <activity
             android:name=".StartGameActivity"
             android:label="@string/title_activity_start_game"

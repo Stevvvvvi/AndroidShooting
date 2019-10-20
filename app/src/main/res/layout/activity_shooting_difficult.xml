@@ -59,6 +59,11 @@
         android:text=""
         android:background="@android:color/transparent"/>
 
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/wolves"
+        android:name="com.test.shooting.CustomArFragment"/>
 
     <ImageView
         android:id="@+id/gun"
@@ -66,8 +71,11 @@
         android:layout_height="288dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
+
         app:srcCompat="@drawable/gun3"
         />
+
+
 
 
 </RelativeLayout>

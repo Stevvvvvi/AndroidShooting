@@ -1,44 +1,46 @@
 package com.test.shooting;
 
+import android.animation.ObjectAnimator;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.media.AudioAttributes;
 import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Display;
-import android.view.animation.Animation;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.google.ar.core.Anchor;
 
-import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.ar.core.Anchor;
+import com.google.ar.core.Frame;
+import com.google.ar.core.Plane;
+import com.google.ar.core.TrackingState;
 import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.Camera;
+import com.google.ar.sceneform.FrameTime;
 import com.google.ar.sceneform.Node;
 import com.google.ar.sceneform.Scene;
-import com.google.ar.sceneform.SkeletonNode;
-//import com.google.ar.sceneform.animation.ModelAnimator;
 import com.google.ar.sceneform.collision.Ray;
 import com.google.ar.sceneform.math.Quaternion;
+import com.google.ar.sceneform.math.QuaternionEvaluator;
 import com.google.ar.sceneform.math.Vector3;
-import com.google.ar.sceneform.rendering.AnimationData;
 import com.google.ar.sceneform.rendering.MaterialFactory;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.rendering.ShapeFactory;
 import com.google.ar.sceneform.rendering.Texture;
 import com.google.ar.sceneform.ux.ArFragment;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Random;
 
-public class ShootingActivityAnimation extends AppCompatActivity {
+//import com.google.ar.sceneform.animation.ModelAnimator;
+
+public class ShootingActivitydifficult extends AppCompatActivity {
 
     private Scene scene;
     private Camera camera;
@@ -49,13 +51,12 @@ public class ShootingActivityAnimation extends AppCompatActivity {
     private TextView balloonleftTxt;
     private SoundPool soundPool;
     private int sound;
-    private int airGun;
-    private int birdSound;
     protected String timeInfo;
     //private ModelAnimator modelAnimator;
     private int i=0;
     private ImageView gunImage;
-
+    private ArFragment groundMonster;
+    private Boolean groundPlaced=false;
     //Bitmap bitmap= BitmapFactory.decodeFile("drawable/gun.jpg");
 
 //    private RelativeLayout myLayout=null;
@@ -71,8 +72,10 @@ public class ShootingActivityAnimation extends AppCompatActivity {
         Display display=getWindowManager().getDefaultDisplay();
         point=new Point();
         display.getRealSize(point);
+        //groundMonster=(ArFragment)getSupportFragmentManager().findFragmentById(R.id.wolves);
+        //groundMonster.getArSceneView().getScene().addOnUpdateListener(this::onUpdate);
 
-        setContentView(R.layout.activity_shooting_animation);
+        setContentView(R.layout.activity_shooting_difficult);
 
         loadSoundPool();
         balloonleftTxt=findViewById(R.id.balloonsCntTxt);
@@ -131,8 +134,7 @@ public class ShootingActivityAnimation extends AppCompatActivity {
                 .build();
 
         sound=soundPool.load(this,R.raw.blop_sound,1);
-        airGun=soundPool.load(this,R.raw.air_gun_shot,2);
-        birdSound=soundPool.load(this,R.raw.bird_chirping_2,3);
+
 
 
 
@@ -144,7 +146,6 @@ public class ShootingActivityAnimation extends AppCompatActivity {
         Node node=new Node();
         node.setRenderable(bulletRenderable);
         scene.addChild(node);
-        soundPool.play(airGun,1f,1f,1,0,1f);
 
         new Thread(()->{
 
@@ -210,7 +211,7 @@ public class ShootingActivityAnimation extends AppCompatActivity {
             }
             timeInfo=minitesPassed+":"+secondsPassed;
             //Toast.makeText(ShootingActivity.this,"Congrats!",Toast.LENGTH_SHORT).show();
-            Intent inToleader=new Intent(ShootingActivityAnimation.this,GameResultActivity.class);
+            Intent inToleader=new Intent(ShootingActivitydifficult.this,GameResultActivity.class);
             inToleader.putExtra("EXTRA_MESSAGE",timeInfo);
             startActivity(inToleader);
             finish();
@@ -279,7 +280,6 @@ public class ShootingActivityAnimation extends AppCompatActivity {
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
-                            soundPool.play(birdSound,1f,1f,2,0,1f);
                             for (int i=0;i<5;i++){
                                 runOnUiThread(()->{
                                     Random random=new Random();
@@ -295,8 +295,6 @@ public class ShootingActivityAnimation extends AppCompatActivity {
                                             (float)z
                                     ));
                                     nodes.get(random.nextInt(20)).setWorldRotation(Quaternion.axisAngle(new Vector3(0, 1, 0), 90));
-
-
                                 });
                             };
 
@@ -308,6 +306,37 @@ public class ShootingActivityAnimation extends AppCompatActivity {
 
                 });
     }
+    private void callWolve(Anchor anchor) {
+        groundPlaced=true;
+        ModelRenderable
+                .builder()
+                .setSource(this, Uri.parse("Wolve.sfb"))
+                .build()
+                .thenAccept(renderable -> {
+                    AnchorNode anchorNode=new AnchorNode(anchor);
+
+                    scene.addChild(anchorNode);
+
+
+        });
+    }
+    private void onUpdate(FrameTime frameTime){
+        if (groundPlaced)
+            return;
+        Frame frame=groundMonster.getArSceneView().getArFrame();
+        Collection<Plane> planes=frame.getUpdatedTrackables(Plane.class);
+
+        for (Plane plane: planes){
+            if (plane.getTrackingState()==TrackingState.TRACKING){
+                Anchor anchor=plane.createAnchor(plane.getCenterPose());
+                callWolve(anchor);
+
+                break;
+            }
+        }
+    }
+
+
 
     /*private void addMoveToScene() {
         ModelRenderable
