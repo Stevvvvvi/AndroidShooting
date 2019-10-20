@@ -52,7 +52,7 @@ public class GameResultActivity extends AppCompatActivity {
 
 
         //read the time from user database and get the best time. Then write the best time
-        readvalue(gametime);
+        readvalue(gametime,gamemode);
 
 
         back.setOnClickListener(view -> {
@@ -85,7 +85,7 @@ public class GameResultActivity extends AppCompatActivity {
 
 
 
-    public void readvalue(String gametime){
+    public void readvalue(String gametime,String gamemode){
         //read the time from user database
         db.collection("Users")
                 .document(mFirebaseAuth.getCurrentUser().getEmail())
@@ -94,19 +94,44 @@ public class GameResultActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
                         UserList userList = documentSnapshot.toObject(UserList.class);
-//                        Log.d(TAG, "ReadFromeFirebase: "+userList.getUserTime());
 
-                        if (userList.getUserTime().isEmpty()){
+                        String Easy = userList.getEasy();
+                        String Hard = userList.getHard();
+                        String Normal = userList.getNormal();
+                        String mode = null;
+
+                        if (gamemode.equals("Easy")){
+                            mode = Easy;
+                        }else if (gamemode.equals("Hard")){
+                            mode = Hard;
+                        }else if (gamemode.equals("Normal")){
+                            mode = Normal;
+                        }
+
+
+                        if (mode.isEmpty()){
                             best_time = gametime;
 //                            Log.d(TAG, "besttime0: "+ best_time);
-                            writevalue(best_time);
+                            if (gamemode.equals("Easy")){
+                                writevalue(best_time,Hard,Normal);
+                            }else if (gamemode.equals("Hard")){
+                                writevalue(Easy,best_time,Normal);
+                            }else if (gamemode.equals("Normal")){
+                                writevalue(Easy,Hard,best_time);
+                            }
                             BesttimeDisplay.setText(transformTime(best_time));
 
 
                         }else {
-                            best_time = getBestTime(userList.getUserTime(),gametime);
+                            best_time = getBestTime(mode,gametime);
 //                            Log.d(TAG, "besttime1: "+ best_time);
-                            writevalue(best_time);
+                            if (gamemode.equals("Easy")){
+                                writevalue(best_time,Hard,Normal);
+                            }else if (gamemode.equals("Hard")){
+                                writevalue(Easy,best_time,Normal);
+                            }else if (gamemode.equals("Normal")){
+                                writevalue(Easy,Hard,best_time);
+                            }
                             BesttimeDisplay.setText(transformTime(best_time));
 
                         }
@@ -114,9 +139,9 @@ public class GameResultActivity extends AppCompatActivity {
                 });
     }
 
-    public void writevalue(String gametime){
+    public void writevalue(String Easy, String Hard, String Normal){
 //        Log.d(TAG, "besttime2: "+ best_time);
-        UserList userList = new UserList(gametime);
+        UserList userList = new UserList(Easy,Hard,Normal);
         db.collection("Users")
                 .document(mFirebaseAuth.getCurrentUser().getEmail())
                 .set(userList)
@@ -142,6 +167,13 @@ public class GameResultActivity extends AppCompatActivity {
         String[] best_arrary = best.split(":");
         String[] thisgame_arrary = thisgame.split(":");
 
+//        Log.d(TAG, "best_arrary0: "+ Integer.parseInt(best_arrary[0]));
+//        Log.d(TAG, "best_arrary1: "+ Integer.parseInt(best_arrary[1]));
+//
+//        Log.d(TAG, "thisgame_arrary0: "+ Integer.parseInt(thisgame_arrary[0]));
+//        Log.d(TAG, "thisgame_arrary1: "+ Integer.parseInt(thisgame_arrary[1]));
+
+
         if (Integer.parseInt(best_arrary[0]) < Integer.parseInt(thisgame_arrary[0])){
             result = best;
         }else if (Integer.parseInt(best_arrary[0]) > Integer.parseInt(thisgame_arrary[0])){
@@ -150,33 +182,44 @@ public class GameResultActivity extends AppCompatActivity {
         }else if (Integer.parseInt(best_arrary[0]) == Integer.parseInt(thisgame_arrary[0])){
             if (Integer.parseInt(best_arrary[1]) <= Integer.parseInt(thisgame_arrary[1])){
                 result = best;
-            }else if (Integer.parseInt(best_arrary[0]) > Integer.parseInt(thisgame_arrary[0])){
+            }else if (Integer.parseInt(best_arrary[1]) > Integer.parseInt(thisgame_arrary[1])){
                 result = thisgame;
             }
         }
-
+        Log.d(TAG, "result: "+ result);
         return result;
     }
 
     public String transformTime(String time){
-        String[] time_arrary = time.split(":");
+        if (time.isEmpty()){
+            return "error";
+        }else {
+            String[] time_arrary = time.split(":");
 
-        return time_arrary[0]+" min "+time_arrary[1]+"s";
+            return time_arrary[0]+" min "+time_arrary[1]+"s";
+        }
+
     }
 
     /**
      * user to write and read data with firebase
      */
     public static class UserList {
-        private String userTime;
+        private String easy, hard, normal;
 
         public UserList() {}
 
-        public UserList(String userTime) {
-            this.userTime = userTime;
+        public UserList(String easy,String hard,String normal) {
+            this.easy = easy;
+            this.hard = hard;
+            this.normal = normal;
 
         }
-        public String getUserTime() {return userTime;}
+
+        public String getEasy() {return easy;}
+        public String getHard() {return hard;}
+        public String getNormal() {return normal;}
+
     }
 
 }
