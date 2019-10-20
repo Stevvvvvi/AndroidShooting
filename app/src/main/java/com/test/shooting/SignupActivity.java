@@ -85,7 +85,9 @@ public class SignupActivity extends AppCompatActivity {
                             }else {
                                 // after create the account, add the profile value to database
                                 Map<String, Object> user = new HashMap<>();
-                                //user.put("Email", email);
+                                user.put("easy", "99:60");
+                                user.put("hard", "99:60");
+                                user.put("normal", "99:60");
 
                                 // Add a new document with a generated ID
                                 db.collection("Users")
