@@ -46,6 +46,8 @@ public class ShootingActivity_easy extends AppCompatActivity {
     private ImageView gunImage;
     private String Mode;
     private Button giveUpe;
+    private Boolean stopThread = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +78,7 @@ public class ShootingActivity_easy extends AppCompatActivity {
         giveUpe=findViewById(R.id.giveUp);
         giveUpe.setOnClickListener(view -> {
             Intent backToMain=new Intent(ShootingActivity_easy.this,StartGameActivity.class);
+            stopThread = false;
             startActivity(backToMain);
             finish();
         });
@@ -112,8 +115,8 @@ public class ShootingActivity_easy extends AppCompatActivity {
                 .build();
 
         sound=soundPool.load(this,R.raw.blop_sound,1);
-        airGun=soundPool.load(this,R.raw.air_gun_shot,2);
-        birdSound=soundPool.load(this,R.raw.plane,3);
+        airGun=soundPool.load(this,R.raw.air_gun_shot,1);
+        birdSound=soundPool.load(this,R.raw.plane,1);
 
 
 
@@ -195,6 +198,7 @@ public class ShootingActivity_easy extends AppCompatActivity {
             inToleader.putExtra("GameTime",timeInfo);
             Mode="Easy";
             inToleader.putExtra("Mode",Mode);
+            stopThread = false;
             startActivity(inToleader);
             finish();
         }).start();
@@ -251,7 +255,7 @@ public class ShootingActivity_easy extends AppCompatActivity {
 
                     }
                     new Thread(()->{
-                        while(true){
+                        while(stopThread){
 
                             Random time=new Random();
                             try {

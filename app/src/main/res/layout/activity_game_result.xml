@@ -75,31 +75,26 @@
         android:id="@+id/restart"
         android:layout_width="99dp"
         android:layout_height="51dp"
-        android:layout_marginBottom="128dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="100dp"
         android:background="#8BC34A"
         android:text="ReStart"
         android:textColor="#000000"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/back"
-        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/besttime_tip"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/besttime_tip" />
 
     <Button
         android:id="@+id/back"
         android:layout_width="99dp"
         android:layout_height="51dp"
-        android:layout_marginEnd="68dp"
-        android:layout_marginBottom="128dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="100dp"
         android:background="#00BCD4"
         android:text="Back"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/besttime"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toEndOf="@+id/restart"
+        app:layout_constraintTop_toBottomOf="@+id/besttime" />
 
     <TextView
         android:id="@+id/mode"

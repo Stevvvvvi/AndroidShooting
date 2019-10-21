@@ -360,7 +360,7 @@
     file: 'Sampledata/FShuttle.fbx',
     name: 'FShuttle',
     recenter: 'root',
-    scale: 0.79431300000000005,
+    scale: 0.19431300000000005,
   },
   version: '0.54:2',
 }

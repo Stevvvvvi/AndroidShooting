@@ -46,6 +46,8 @@ public class ShootingActivity_normal extends AppCompatActivity {
     private ImageView gunImage;
     private String Mode;
     private Button giveUpe;
+    private Boolean stopThread = true;
+
 
 
 
@@ -79,6 +81,7 @@ public class ShootingActivity_normal extends AppCompatActivity {
         giveUpe=findViewById(R.id.giveUp);
         giveUpe.setOnClickListener(view -> {
             Intent backToMain=new Intent(ShootingActivity_normal.this,StartGameActivity.class);
+            stopThread = false;
             startActivity(backToMain);
             finish();
         });
@@ -114,8 +117,8 @@ public class ShootingActivity_normal extends AppCompatActivity {
                 .build();
 
         sound=soundPool.load(this,R.raw.blop_sound,1);
-        airGun=soundPool.load(this,R.raw.air_gun_shot,2);
-        birdSound=soundPool.load(this,R.raw.bird_chirping_2,3);
+        airGun=soundPool.load(this,R.raw.air_gun_shot,1);
+        birdSound=soundPool.load(this,R.raw.bird_chirping_2,1);
 
 
 
@@ -197,6 +200,7 @@ public class ShootingActivity_normal extends AppCompatActivity {
             inToleader.putExtra("GameTime",timeInfo);
             Mode="Normal";
             inToleader.putExtra("Mode",Mode);
+            stopThread = false;
             startActivity(inToleader);
             finish();
         }).start();
@@ -253,7 +257,7 @@ public class ShootingActivity_normal extends AppCompatActivity {
 
                     }
                     new Thread(()->{
-                        while(true){
+                        while(stopThread){
 
                             Random time=new Random();
                             try {
