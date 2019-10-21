@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ShootingActivity_hard">
+    tools:context=".ShootingActivity_hard"
+    android:clickable="false"
+    android:id="@+id/shootingLayout">
 
     <fragment
         android:layout_width="match_parent"
@@ -14,78 +16,81 @@
         android:clickable="true"/>
 
     <TextView
-        android:id="@+id/balloonsCntTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
         android:layout_margin="12dp"
-        android:layout_marginTop="104dp"
-        android:layout_marginEnd="32dp"
-        android:clickable="false"
+        android:layout_alignParentEnd="true"
         android:text="Monsters Left: 20"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/balloonsCntTxt"
+        android:textSize="22sp"
+        android:clickable="false"/>
 
     <TextView
-        android:id="@+id/timerText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+
+        android:layout_alignParentLeft="true"
+        android:text="Mode: Hard"
+        android:id="@+id/mode"
+        android:textSize="22sp"
+        android:clickable="false"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="92dp"
-        android:clickable="false"
-        android:fontFamily="serif-monospace"
         android:text="0:0"
-        android:textSize="34sp"
+        android:textSize="38sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/arFragment" />
+        android:fontFamily="serif-monospace"
+        android:id="@+id/timerText"
+        android:clickable="false"/>
 
     <View
         android:layout_width="72dp"
         android:layout_height="4dp"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="376dp"
         android:background="#7a000000"
-        android:clickable="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/arFragment"
-        app:layout_constraintTop_toTopOf="@+id/arFragment" />
-
+        android:layout_centerInParent="true"
+        android:clickable="false"/>
     <View
         android:layout_width="4dp"
         android:layout_height="72dp"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="380dp"
         android:background="#7a000000"
-        android:clickable="false"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/arFragment" />
-
+        android:layout_centerInParent="true"
+        android:clickable="false"/>
     <Button
-        android:id="@+id/shootButton"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/shootButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="@android:color/transparent"
+        android:layout_marginBottom="8dp"
         android:text=""
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp" />
+        android:background="@android:color/transparent"/>
 
-    <TextView
-        android:id="@+id/hard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:text="Mode: Hard"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/gun"
+        android:layout_width="281dp"
+        android:layout_height="288dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        app:srcCompat="@drawable/gun3"
+        />
+
+    <Button
+        android:id="@+id/giveUp"
+        android:layout_width="107dp"
+        android:layout_height="63dp"
+
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="Give Up" />
+
+
+</RelativeLayout>

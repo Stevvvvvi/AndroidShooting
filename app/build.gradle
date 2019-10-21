@@ -32,9 +32,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-firestore:21.1.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    testImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'com.google.firebase:firebase-analytics:17.2.0'
-    implementation 'com.google.firebase:firebase-auth:19.0.0'
+    implementation 'com.google.firebase:firebase-auth:19.1.0'
     implementation 'com.google.ar.sceneform.ux:sceneform-ux:1.12.0'
     implementation 'com.google.ar.sceneform:animation:1.12.0'
     implementation 'com.github.ybq:Android-SpinKit:1.4.0'
@@ -50,3 +52,14 @@ sceneform.asset('Sampledata/embedded_resources.fbx',
         'default',
         'Sampledata/embedded_resources.sfa',
         'src/main/assets/bird')
+
+
+sceneform.asset('Sampledata/planeUVBlender.fbx',
+        'default',
+        'Sampledata/planeUVBlender.sfa',
+        'src/main/assets/plane')
+
+sceneform.asset('Sampledata/FShuttle.fbx',
+        'default',
+        'Sampledata/FShuttle.sfa',
+        'src/main/assets/Shuttle')
