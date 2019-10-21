@@ -115,7 +115,7 @@ public class ShootingActivity_hard extends AppCompatActivity {
 
         sound=soundPool.load(this,R.raw.blop_sound,1);
         airGun=soundPool.load(this,R.raw.air_gun_shot,2);
-        birdSound=soundPool.load(this,R.raw.bird_chirping_2,3);
+        birdSound=soundPool.load(this,R.raw.motor,3);
 
 
 
