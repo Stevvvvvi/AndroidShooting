@@ -48,7 +48,7 @@ public class LeaderboardActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         db.collection("Users")
-                .orderBy("userTime")
+                .orderBy("easy")
                 .limit(10)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -59,8 +59,8 @@ public class LeaderboardActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 UserList userList = document.toObject(UserList.class);
                                 Log.d(TAG, document.getId() + " => " + document.getData());
-                                Log.d(TAG, "userTime" + " => " + userList.getUserTime());
-                                top[i].setText(document.getId() + " => " + userList.getUserTime());
+                                Log.d(TAG, "userTime" + " => " + userList.getEasy());
+                                top[i].setText(document.getId() + " => " + userList.getEasy());
                                 i++;
                                 //  need to change the value structure "0:2" to "0:02"
                             }
@@ -75,14 +75,20 @@ public class LeaderboardActivity extends AppCompatActivity {
      * user to write and read data with firebase
      */
     public static class UserList {
-        private String userTime;
+        private String easy, hard, normal;
 
         public UserList() {}
 
-        public UserList(String userTime) {
-            this.userTime = userTime;
+        public UserList(String easy,String hard,String normal) {
+            this.easy = easy;
+            this.hard = hard;
+            this.normal = normal;
 
         }
-        public String getUserTime() {return userTime;}
+
+        public String getEasy() {return easy;}
+        public String getHard() {return hard;}
+        public String getNormal() {return normal;}
+
     }
 }
