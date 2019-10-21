@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LeaderboardActivity"></activity>
+        <activity android:name=".ShootingActivity_hard"></activity>
+        <activity android:name=".ShootingActivity_normal" />
+        <activity android:name=".ShootingActivity_easy" />
+        <activity android:name=".LeaderboardActivity" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".GameResultActivity" />
         <activity android:name=".ShootingActivity" />
