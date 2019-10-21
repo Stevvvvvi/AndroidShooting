@@ -257,7 +257,7 @@ public class ShootingActivity_easy extends AppCompatActivity {
 
                             Random time=new Random();
                             try {
-                                Thread.sleep(time.nextInt(3000));
+                                Thread.sleep(time.nextInt(17000));
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }

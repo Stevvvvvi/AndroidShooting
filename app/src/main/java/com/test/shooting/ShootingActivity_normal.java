@@ -136,7 +136,7 @@ public class ShootingActivity_normal extends AppCompatActivity {
                 int finalI1 = i;
                 runOnUiThread(()->{
 
-                    Vector3 vector3=ray.getPoint(finalI1 *0.1f);
+                    Vector3 vector3=ray.getPoint(finalI1 *0.07f);
                     node.setWorldPosition(vector3);
 
                     Node nodeInContact=scene.overlapTest(node);
@@ -257,7 +257,7 @@ public class ShootingActivity_normal extends AppCompatActivity {
 
                             Random time=new Random();
                             try {
-                                Thread.sleep(time.nextInt(2000));
+                                Thread.sleep(time.nextInt(4000));
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }

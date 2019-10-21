@@ -115,7 +115,7 @@ public class ShootingActivity_hard extends AppCompatActivity {
 
         sound=soundPool.load(this,R.raw.blop_sound,1);
         airGun=soundPool.load(this,R.raw.air_gun_shot,2);
-        birdSound=soundPool.load(this,R.raw.motor,3);
+        birdSound=soundPool.load(this,R.raw.motor2,3);
 
 
 
@@ -136,7 +136,7 @@ public class ShootingActivity_hard extends AppCompatActivity {
                 int finalI1 = i;
                 runOnUiThread(()->{
 
-                    Vector3 vector3=ray.getPoint(finalI1 *0.1f);
+                    Vector3 vector3=ray.getPoint(finalI1 *0.04f);
                     node.setWorldPosition(vector3);
 
                     Node nodeInContact=scene.overlapTest(node);
@@ -256,7 +256,7 @@ public class ShootingActivity_hard extends AppCompatActivity {
 
                             Random time=new Random();
                             try {
-                                Thread.sleep(time.nextInt(1000));
+                                Thread.sleep(time.nextInt(3000));
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
