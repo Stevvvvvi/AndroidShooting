@@ -43,15 +43,9 @@ dependencies {
 }
 
 
-sceneform.asset('Sampledata/balloon.fbx',
-        'default',
-        'Sampledata/balloon.sfa',
-        'src/main/assets/balloon')
 
-sceneform.asset('Sampledata/Wolves.obj',
-        'default',
-        'Sampledata/Wolves.sfa',
-        'src/main/assets/Wolves')
+
+
 apply plugin: 'com.google.gms.google-services'
 
 
@@ -60,3 +54,15 @@ sceneform.asset('Sampledata/embedded_resources.fbx',
         'Sampledata/embedded_resources.sfa',
         'src/main/assets/bird')
 
+
+
+sceneform.asset('Sampledata/plane/planeUVBlender.fbx',
+        'default',
+        'Sampledata/plane/planeUVBlender.sfa',
+        'src/main/assets/plane')
+
+
+sceneform.asset('Sampledata/FShuttle.fbx',
+        'default',
+        'Sampledata/FShuttle.sfa',
+        'src/main/assets/Shuttle')

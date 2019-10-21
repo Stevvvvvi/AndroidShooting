@@ -1,44 +1,33 @@
 package com.test.shooting;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.media.AudioAttributes;
 import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Display;
-import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import com.google.ar.core.Anchor;
 
-import androidx.annotation.UiThread;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.google.ar.sceneform.AnchorNode;
 import com.google.ar.sceneform.Camera;
 import com.google.ar.sceneform.Node;
 import com.google.ar.sceneform.Scene;
-import com.google.ar.sceneform.SkeletonNode;
-//import com.google.ar.sceneform.animation.ModelAnimator;
 import com.google.ar.sceneform.collision.Ray;
 import com.google.ar.sceneform.math.Quaternion;
 import com.google.ar.sceneform.math.Vector3;
-import com.google.ar.sceneform.rendering.AnimationData;
 import com.google.ar.sceneform.rendering.MaterialFactory;
 import com.google.ar.sceneform.rendering.ModelRenderable;
 import com.google.ar.sceneform.rendering.ShapeFactory;
 import com.google.ar.sceneform.rendering.Texture;
-import com.google.ar.sceneform.ux.ArFragment;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class ShootingActivityAnimation extends AppCompatActivity {
+public class ShootingActivity_hard extends AppCompatActivity {
 
     private Scene scene;
     private Camera camera;
@@ -55,10 +44,10 @@ public class ShootingActivityAnimation extends AppCompatActivity {
     //private ModelAnimator modelAnimator;
     private int i=0;
     private ImageView gunImage;
+    private String Mode;
+    private  Button giveUpe;
 
-    //Bitmap bitmap= BitmapFactory.decodeFile("drawable/gun.jpg");
 
-//    private RelativeLayout myLayout=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,13 +55,11 @@ public class ShootingActivityAnimation extends AppCompatActivity {
 
 
         gunImage=(ImageView)findViewById(R.id.gun);
-        //gunImage.setImageResource(R.drawable.gun);
-        //gunImage.setImageBitmap(BitmapFactory.decodeFile("drawable/gun.jpg"));
         Display display=getWindowManager().getDefaultDisplay();
         point=new Point();
         display.getRealSize(point);
 
-        setContentView(R.layout.activity_shooting_animation);
+        setContentView(R.layout.activity_shooting_hard);
 
         loadSoundPool();
         balloonleftTxt=findViewById(R.id.balloonsCntTxt);
@@ -89,28 +76,24 @@ public class ShootingActivityAnimation extends AppCompatActivity {
 
         Button shoot=findViewById(R.id.shootButton);
 
+        giveUpe=findViewById(R.id.giveUp);
+        giveUpe.setOnClickListener(view -> {
+            Intent backToMain=new Intent(ShootingActivity_hard.this,StartGameActivity.class);
+            startActivity(backToMain);
+            finish();
+        });
 
-//        myLayout=(RelativeLayout) findViewById(R.id.shootingLayout);
-//        myLayout.setOnClickListener(v->{
-//            Toast.makeText(ShootingActivity.this,"Shoot",Toast.LENGTH_SHORT).show();
-//            if(shouldStartTimer){
-//                startTimer();
-//                shouldStartTimer=false;
-//            }
-//
-//            shoot();
-//        });
 
 
 
         shoot.setOnClickListener(v-> {
 
-                if(shouldStartTimer){
-                    startTimer();
-                    shouldStartTimer=false;
-                }
+            if(shouldStartTimer){
+                startTimer();
+                shouldStartTimer=false;
+            }
 
-                shoot();
+            shoot();
 
         });
 
@@ -132,7 +115,7 @@ public class ShootingActivityAnimation extends AppCompatActivity {
 
         sound=soundPool.load(this,R.raw.blop_sound,1);
         airGun=soundPool.load(this,R.raw.air_gun_shot,2);
-        birdSound=soundPool.load(this,R.raw.bird_chirping_2,3);
+        birdSound=soundPool.load(this,R.raw.motor2,3);
 
 
 
@@ -153,7 +136,7 @@ public class ShootingActivityAnimation extends AppCompatActivity {
                 int finalI1 = i;
                 runOnUiThread(()->{
 
-                    Vector3 vector3=ray.getPoint(finalI1 *0.1f);
+                    Vector3 vector3=ray.getPoint(finalI1 *0.04f);
                     node.setWorldPosition(vector3);
 
                     Node nodeInContact=scene.overlapTest(node);
@@ -210,8 +193,10 @@ public class ShootingActivityAnimation extends AppCompatActivity {
             }
             timeInfo=minitesPassed+":"+secondsPassed;
             //Toast.makeText(ShootingActivity.this,"Congrats!",Toast.LENGTH_SHORT).show();
-            Intent inToleader=new Intent(ShootingActivityAnimation.this,GameResultActivity.class);
-            inToleader.putExtra("EXTRA_MESSAGE",timeInfo);
+            Intent inToleader=new Intent(ShootingActivity_hard.this,GameResultActivity.class);
+            inToleader.putExtra("GameTime",timeInfo);
+            Mode="Hard";
+            inToleader.putExtra("Mode",Mode);
             startActivity(inToleader);
             finish();
         }).start();
@@ -227,31 +212,27 @@ public class ShootingActivityAnimation extends AppCompatActivity {
                     MaterialFactory
                             .makeOpaqueWithTexture(this, texture)
                             .thenAccept(material -> {
-                                  bulletRenderable=ShapeFactory
-                                          .makeSphere(0.01f,
-                                                  new Vector3(0f,0f,0f)
-                                                  ,material);
-                    });
-        });
+                                bulletRenderable= ShapeFactory
+                                        .makeSphere(0.01f,
+                                                new Vector3(0f,0f,0f)
+                                                ,material);
+                            });
+                });
     }
 
     private void addBalloonsToScene() {
         ModelRenderable
                 .builder()
-                .setSource(this, Uri.parse("bird.sfb"))
+                .setSource(this, Uri.parse("Shuttle.sfb"))
                 .build()
                 .thenAccept(renderable ->{
                     ArrayList<Node> nodes=new ArrayList<>(20);
                     for (int i=0; i<20; i++){
                         nodes.add(i,new Node());
 
-                        //AnchorNode anchorNode=new AnchorNode(anchor);
-                        //SkeletonNode skeletonNode=new SkeletonNode();
 
                         nodes.get(i).setRenderable(renderable);
                         scene.addChild(nodes.get(i));
-                        //animateModel(renderable);
-
 
                         Random random=new Random();
                         int x=random.nextInt(10);
@@ -275,12 +256,12 @@ public class ShootingActivityAnimation extends AppCompatActivity {
 
                             Random time=new Random();
                             try {
-                                Thread.sleep(time.nextInt(2000));
+                                Thread.sleep(time.nextInt(3000));
                             } catch (InterruptedException e) {
                                 e.printStackTrace();
                             }
                             soundPool.play(birdSound,1f,1f,2,0,1f);
-                            for (int i=0;i<5;i++){
+                            for (int i=0;i<8;i++){
                                 runOnUiThread(()->{
                                     Random random=new Random();
                                     int x=random.nextInt(10);
@@ -309,79 +290,6 @@ public class ShootingActivityAnimation extends AppCompatActivity {
                 });
     }
 
-    /*private void addMoveToScene() {
-        ModelRenderable
-                .builder()
-                .setSource(this, Uri.parse("balloon.sfb"))
-                .build()
-                .thenAccept(renderable -> {
 
-                    new Thread(()->{
-                        runOnUiThread(()->{
-                            Node node=new Node();
-                            Random random=new Random();
-
-                            int z=random.nextInt(10);
-                            int y=random.nextInt(20);
-
-
-                            z=-z;
-                            int x=random.nextInt(10);
-                            while(true){
-                                if (x>=10){
-                                    x=0;
-                                }
-                                node.setWorldPosition(new Vector3(
-                                        (float)x,
-                                        y/10f,
-                                        (float)z
-                                ));
-                                try {
-                                    Thread.sleep(random.nextInt(x*100));
-                                } catch (InterruptedException e) {
-                                    e.printStackTrace();
-                                }
-                                x=x+1;
-                                node.setWorldPosition(new Vector3(
-                                        (float)x,
-                                        y/10f,
-                                        (float)z
-                                ));
-                            }
-
-
-
-
-                        });
-                    }).start();
-
-
-
-                });
-    }*/
-
-
-
-
-//    private void animateModel(ModelRenderable modelRenderable){
-//        if (modelAnimator!=null&& modelAnimator.isRunning()){
-//            modelAnimator.end();
-//
-//            int animationCount=modelRenderable.getAnimationDataCount();
-//
-//            if (i==animationCount)
-//                i=0;
-//            AnimationData animationData=modelRenderable.getAnimationData(i);
-//
-//            modelAnimator =new ModelAnimator(animationData,modelRenderable);
-//            modelAnimator.start();
-//            i++;
-//        }
-//    }
-
-   // @Override
-    //protected void onStart(){
-     //   super.onStart();
-        //mFirebaseAuth.addAuthStateListener(mAuthStateListener);
-   // }
 }
+
