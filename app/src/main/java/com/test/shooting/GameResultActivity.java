@@ -295,12 +295,16 @@ public class GameResultActivity extends AppCompatActivity {
     }
 
     public String transformTime(String time){
+        int m,s;
+
         if (time.isEmpty()){
             return "error";
         }else {
             String[] time_arrary = time.split(":");
+            m = Integer.parseInt(time_arrary[0]);
+            s = Integer.parseInt(time_arrary[1]);
 
-            return time_arrary[0]+" min "+time_arrary[1]+"s";
+            return m+" min "+ s +"s";
         }
 
     }

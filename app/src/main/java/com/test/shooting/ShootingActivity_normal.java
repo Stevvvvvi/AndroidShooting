@@ -194,9 +194,9 @@ public class ShootingActivity_normal extends AppCompatActivity {
                 minitesPassed=currentMinitesPassed;
                 secondsPassed=currentSecondsPassed;
             }
-            timeInfo=minitesPassed+":"+secondsPassed;
             //Toast.makeText(ShootingActivity.this,"Congrats!",Toast.LENGTH_SHORT).show();
             Intent inToleader=new Intent(ShootingActivity_normal.this,GameResultActivity.class);
+            timeInfo = transform(minitesPassed,secondsPassed);
             inToleader.putExtra("GameTime",timeInfo);
             Mode="Normal";
             inToleader.putExtra("Mode",Mode);
@@ -294,6 +294,32 @@ public class ShootingActivity_normal extends AppCompatActivity {
 
                 });
     }
+    public String transform(int minitesPassed, int secondsPassed){
+        int m,s;
+        String minites, seconds;
+        m = (""+minitesPassed).length();
+        s = (""+secondsPassed).length();
+
+        if (m == 1 && s != 1){
+            minites = "0"+minitesPassed;
+            return minites+":"+secondsPassed;
+        }
+        else if (m != 1 && s == 1){
+            seconds = "0"+secondsPassed;
+            return minitesPassed+":"+seconds;
+        }
+        else if (m == 1 && s == 1){
+            minites = "0"+minitesPassed;
+            seconds = "0"+secondsPassed;
+            return minites+":"+seconds;
+        }else {
+            return minitesPassed+":"+secondsPassed;
+
+        }
+
+
+    }
+
 
 
 }
