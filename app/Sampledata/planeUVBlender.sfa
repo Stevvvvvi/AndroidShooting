@@ -175,7 +175,7 @@
     file: 'Sampledata/planeUVBlender.fbx',
     name: 'planeUVBlender',
     recenter: 'root',
-    scale: 0.36593100000000001,
+    scale: 0.24593100000000001,
   },
   version: '0.54:2',
 }

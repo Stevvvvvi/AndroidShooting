@@ -59,33 +59,42 @@
         android:background="#7a000000"
         android:layout_centerInParent="true"
         android:clickable="false"/>
+
+
     <Button
+        android:id="@+id/shootButton"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/shootButton"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="8dp"
-        android:text=""
-        android:background="@android:color/transparent"/>
-
+        android:layout_marginBottom="11dp"
+        android:background="@android:color/transparent"
+        android:text="" />
 
     <ImageView
         android:id="@+id/gun"
-        android:layout_width="281dp"
-        android:layout_height="288dp"
+        android:layout_width="580dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
-        app:srcCompat="@drawable/gun3"
-        />
+        android:layout_marginStart="-87dp"
+        android:layout_marginEnd="-81dp"
+        android:layout_marginRight="-81dp"
+        android:layout_marginBottom="-91dp"
+        app:srcCompat="@drawable/sight4" />
+
     <Button
         android:id="@+id/giveUp"
         android:layout_width="107dp"
         android:layout_height="63dp"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="153dp"
+        android:layout_marginEnd="151dp"
+        android:layout_marginBottom="5dp"
         android:backgroundTint="@color/colorPrimary"
         android:text="Give Up" />
 </RelativeLayout>
