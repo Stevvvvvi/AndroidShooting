@@ -48,7 +48,7 @@ public class StartGameActivity extends AppCompatActivity {
         btnLeaderboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(StartGameActivity.this,"The game started", Toast.LENGTH_LONG).show();
+//                Toast.makeText(StartGameActivity.this,"The game started", Toast.LENGTH_LONG).show();
                 Intent i=new Intent(StartGameActivity.this,LeaderboardActivity.class);
                 startActivity(i);
                 //finish();

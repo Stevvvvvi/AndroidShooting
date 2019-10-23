@@ -33,7 +33,7 @@ public class ShootingActivity_easy extends AppCompatActivity {
     private Camera camera;
     private ModelRenderable bulletRenderable;
     private boolean shouldStartTimer=true;
-    private int balloonsLeft=20;
+    private int balloonsLeft=2;
     private Point point;
     private TextView balloonleftTxt;
     private SoundPool soundPool;

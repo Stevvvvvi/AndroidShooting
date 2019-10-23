@@ -90,8 +90,11 @@ public class LeaderboardActivity extends AppCompatActivity {
                             int i = 0;
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 UserList userList = document.toObject(UserList.class);
-//                                top[i].setText(document.getId() + " => " + userList.getEasy()+"=>"+userList.getEasycity());
-                                data_info[i] = "Top"+(i+1)+":   "+document.getId() + "    " + userList.getEasy()+"    "+userList.getEasycity();
+                                if (i == 9){
+                                    data_info[i] = "Top"+(i+1)+":   "+document.getId() + "    " + userList.getHard()+"    "+userList.getHardcity();
+                                }else {
+                                    data_info[i] = "Top"+(i+1)+"  :   "+document.getId() + "    " + userList.getHard()+"    "+userList.getHardcity();
+                                }
                                 i++;
                             }
                         } else {
@@ -119,8 +122,11 @@ public class LeaderboardActivity extends AppCompatActivity {
                             int i = 0;
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 UserList userList = document.toObject(UserList.class);
-//                                top[i].setText(document.getId() + " => " + userList.getEasy()+"=>"+userList.getEasycity());
-                                data_info[i] = "Top"+(i+1)+":   "+document.getId() + "    " + userList.getNormal()+"    "+userList.getNormalcity();
+                                if (i == 9){
+                                    data_info[i] = "Top"+(i+1)+":   "+document.getId() + "    " + userList.getHard()+"    "+userList.getHardcity();
+                                }else {
+                                    data_info[i] = "Top"+(i+1)+"  :   "+document.getId() + "    " + userList.getHard()+"    "+userList.getHardcity();
+                                }
                                 i++;
                             }
                         } else {
@@ -148,8 +154,11 @@ public class LeaderboardActivity extends AppCompatActivity {
                             int i = 0;
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 UserList userList = document.toObject(UserList.class);
-//                                top[i].setText(document.getId() + " => " + userList.getEasy()+"=>"+userList.getEasycity());
-                                data_info[i] = "Top"+(i+1)+":   "+document.getId() + "    " + userList.getHard()+"    "+userList.getHardcity();
+                                if (i == 9){
+                                    data_info[i] = "Top"+(i+1)+":   "+document.getId() + "    " + userList.getHard()+"    "+userList.getHardcity();
+                                }else {
+                                    data_info[i] = "Top"+(i+1)+"  :   "+document.getId() + "    " + userList.getHard()+"    "+userList.getHardcity();
+                                }
                                 i++;
                             }
                         } else {
@@ -162,7 +171,6 @@ public class LeaderboardActivity extends AppCompatActivity {
                     }
                 });
     }
-
 
 
     /**
