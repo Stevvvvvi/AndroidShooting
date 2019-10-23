@@ -249,7 +249,7 @@ public class ShootingActivity_hard extends AppCompatActivity {
                                 y/10f,
                                 (float)z
                         ));
-                        nodes.get(i).setWorldRotation(Quaternion.axisAngle(new Vector3(0, 1, 0), 90));
+                        nodes.get(i).setWorldRotation(Quaternion.axisAngle(new Vector3(0, 1, 0), 180));
 
 
 
@@ -278,7 +278,7 @@ public class ShootingActivity_hard extends AppCompatActivity {
                                             y/10f,
                                             (float)z
                                     ));
-                                    nodes.get(random.nextInt(20)).setWorldRotation(Quaternion.axisAngle(new Vector3(0, 1, 0), 90));
+                                    nodes.get(random.nextInt(20)).setWorldRotation(Quaternion.axisAngle(new Vector3(0, 1, 0), 180));
 
 
                                 });

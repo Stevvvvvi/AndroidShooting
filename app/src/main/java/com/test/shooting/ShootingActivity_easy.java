@@ -33,7 +33,7 @@ public class ShootingActivity_easy extends AppCompatActivity {
     private Camera camera;
     private ModelRenderable bulletRenderable;
     private boolean shouldStartTimer=true;
-    private int balloonsLeft=2;
+    private int balloonsLeft=20;
     private Point point;
     private TextView balloonleftTxt;
     private SoundPool soundPool;
@@ -249,7 +249,7 @@ public class ShootingActivity_easy extends AppCompatActivity {
                                 y/10f,
                                 (float)z
                         ));
-                        nodes.get(i).setWorldRotation(Quaternion.axisAngle(new Vector3(0, 1, 0), 90));
+                        nodes.get(i).setWorldRotation(Quaternion.axisAngle(new Vector3(0, 1, 0), 180));
 
 
 
