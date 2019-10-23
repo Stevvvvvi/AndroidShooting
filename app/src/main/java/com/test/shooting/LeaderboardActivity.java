@@ -30,7 +30,10 @@ public class LeaderboardActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private static final String TAG = "LeaderboardActivity";
     TextView top[] = new TextView[10];
-    String[] data_info = new String[10];
+    String[] data_hard = new String[10];
+    String[] data_normal = new String[10];
+    String[] data_easy = new String[10];
+
 
 
     @Override
@@ -91,16 +94,16 @@ public class LeaderboardActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 UserList userList = document.toObject(UserList.class);
                                 if (i == 9){
-                                    data_info[i] = "Top"+(i+1)+":   "+document.getId() + "    " + userList.getHard()+"    "+userList.getHardcity();
+                                    data_easy[i] = "Top"+(i+1)+":   "+document.getId() + "    " + userList.getEasy()+"    "+userList.getEasycity();
                                 }else {
-                                    data_info[i] = "Top"+(i+1)+"  :   "+document.getId() + "    " + userList.getHard()+"    "+userList.getHardcity();
+                                    data_easy[i] = "Top"+(i+1)+"  :   "+document.getId() + "    " + userList.getEasy()+"    "+userList.getEasycity();
                                 }
                                 i++;
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(LeaderboardActivity.this, android.R.layout.simple_list_item_1, data_info);
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(LeaderboardActivity.this, android.R.layout.simple_list_item_1, data_easy);
                         ListView listView = (ListView)findViewById(R.id.list_view);
                         listView.setAdapter(adapter);
 
@@ -123,16 +126,16 @@ public class LeaderboardActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 UserList userList = document.toObject(UserList.class);
                                 if (i == 9){
-                                    data_info[i] = "Top"+(i+1)+":   "+document.getId() + "    " + userList.getHard()+"    "+userList.getHardcity();
+                                    data_normal[i] = "Top"+(i+1)+":   "+document.getId() + "    " + userList.getNormal()+"    "+userList.getNormalcity();
                                 }else {
-                                    data_info[i] = "Top"+(i+1)+"  :   "+document.getId() + "    " + userList.getHard()+"    "+userList.getHardcity();
+                                    data_normal[i] = "Top"+(i+1)+"  :   "+document.getId() + "    " + userList.getNormal()+"    "+userList.getNormalcity();
                                 }
                                 i++;
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(LeaderboardActivity.this, android.R.layout.simple_list_item_1, data_info);
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(LeaderboardActivity.this, android.R.layout.simple_list_item_1, data_normal);
                         ListView listView = (ListView)findViewById(R.id.list_view);
                         listView.setAdapter(adapter);
 
@@ -155,16 +158,16 @@ public class LeaderboardActivity extends AppCompatActivity {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 UserList userList = document.toObject(UserList.class);
                                 if (i == 9){
-                                    data_info[i] = "Top"+(i+1)+":   "+document.getId() + "    " + userList.getHard()+"    "+userList.getHardcity();
+                                    data_hard[i] = "Top"+(i+1)+":   "+document.getId() + "    " + userList.getHard()+"    "+userList.getHardcity();
                                 }else {
-                                    data_info[i] = "Top"+(i+1)+"  :   "+document.getId() + "    " + userList.getHard()+"    "+userList.getHardcity();
+                                    data_hard[i] = "Top"+(i+1)+"  :   "+document.getId() + "    " + userList.getHard()+"    "+userList.getHardcity();
                                 }
                                 i++;
                             }
                         } else {
                             Log.d(TAG, "Error getting documents: ", task.getException());
                         }
-                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(LeaderboardActivity.this, android.R.layout.simple_list_item_1, data_info);
+                        ArrayAdapter<String> adapter = new ArrayAdapter<String>(LeaderboardActivity.this, android.R.layout.simple_list_item_1, data_hard);
                         ListView listView = (ListView)findViewById(R.id.list_view);
                         listView.setAdapter(adapter);
 
